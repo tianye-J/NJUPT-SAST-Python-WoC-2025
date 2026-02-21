@@ -39,4 +39,37 @@ class DIV2KDataset(Dataset):
         img_LR = self.transforms_LR(img_HR)
 
         return img_LR, img_HR
-        
+
+
+class CIFAR10Dataset(Dataset):
+    def __init__(self, root_dir='./DS/CIFAR10', train=True, download=True,
+                 mean=(0.4914, 0.4822, 0.4465), std=(0.2023, 0.1994, 0.2010)) -> None:
+        super().__init__()
+        self.root_dir = root_dir
+        self.train = train
+        self.mean = mean
+        self.std = std
+
+        #数据预处理
+        self.transform = transforms.Compose([
+            transforms.ToTensor(),
+            transforms.Normalize(mean, std)
+        ])
+
+        #加载CIFAR10数据集
+        self.dataset = datasets.CIFAR10(
+            root=root_dir,
+            train=train,
+            download=download,
+            transform=self.transform
+        )
+
+        #类别名称
+        self.classes = ('plane', 'car', 'bird', 'cat', 'deer',
+                        'dog', 'frog', 'horse', 'ship', 'truck')
+
+    def __len__(self):
+        return len(self.dataset)
+
+    def __getitem__(self, idx):
+        return self.dataset[idx]
