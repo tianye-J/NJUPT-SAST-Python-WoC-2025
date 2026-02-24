@@ -1,8 +1,10 @@
 import torch
 from torchvision import datasets, transforms
+from torchvision.transforms import functional as F
 from torch.utils.data import Dataset, dataloader
 import os
 from PIL import Image
+
 
 class DIV2KDataset(Dataset):
     def __init__(self, root_dir, crop_size=128, scale_factor=2) -> None:
@@ -39,6 +41,20 @@ class DIV2KDataset(Dataset):
         img_LR = self.transforms_LR(img_HR)
 
         return img_LR, img_HR
+
+
+class Fuzz:
+    def __init__(self, scale_factor=2):
+        self.scale_factor = scale_factor
+
+    def __call__(self, img_tensor):
+        _, h, w = img_tensor.shape
+        small = F.resize(
+            img_tensor,
+            size=[h // self.scale_factor, w // self.scale_factor],
+            interpolation=transforms.InterpolationMode.BICUBIC
+        )
+        return small
 
 
 class CIFAR10Dataset(Dataset):
