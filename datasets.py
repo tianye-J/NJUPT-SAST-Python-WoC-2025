@@ -12,8 +12,8 @@ class DIV2KDataset(Dataset):
         self.root_dir = root_dir
         self.image_files= [f for f in os.listdir(root_dir)]
 
-        self.crop_size = crop_size          #裁剪为crop_size**2大小的图像
-        self.scale_factor = scale_factor    #缩小scale_factor倍
+        self.crop_size = crop_size          
+        self.scale_factor = scale_factor    
 
         #处理高清图片
         self.transforms_HR = transforms.Compose([
@@ -24,7 +24,7 @@ class DIV2KDataset(Dataset):
         #生成低清图片
         self.transforms_LR = transforms.Resize(
             size=(crop_size // scale_factor, crop_size // scale_factor),
-            interpolation=transforms.InterpolationMode.BICUBIC  #双三次插值
+            interpolation=transforms.InterpolationMode.BICUBIC  
         )
 
     def __len__(self):
