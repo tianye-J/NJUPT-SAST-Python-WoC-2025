@@ -126,27 +126,13 @@ $$\mathcal{L}_{total} = \lambda_{SR} \cdot \mathcal{L}_{L1}(X_{restored},\ X_{cl
 
 ### 1. 准备数据集
 
-仓库已包含 CIFAR-10 和 Set14，**只需手动下载 DIV2K 训练集**：
+仓库已包含所有所需数据集，克隆后即可使用，无需额外下载：
 
-| 数据集 | 状态 | 说明 |
+| 数据集 | 路径 | 说明 |
 | :--- | :--- | :--- |
-| CIFAR-10 | ✅ 已包含 | `DS/CIFAR10/`，无需操作 |
-| Set14 | ✅ 已包含 | `DS/Set14/`，无需操作 |
-| DIV2K | ❌ 需下载 | 文件较大（~3.3GB），未包含在仓库中 |
-
-**DIV2K 下载方式**：
-
-```bash
-# 下载 DIV2K 训练集 (800 张 HR 图片)
-# 官方地址：https://data.vision.ee.ethz.ch/cvl/DIV2K/
-wget https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_HR.zip
-
-# 解压到项目目录
-unzip DIV2K_train_HR.zip -d DS/DIV2K/
-mv DS/DIV2K/DIV2K_train_HR/* DS/DIV2K/train/
-```
-
-> 也可以从 [DIV2K 官网](https://data.vision.ee.ethz.ch/cvl/DIV2K/) 手动下载 `DIV2K_train_HR.zip`，解压后将所有图片放入 `DS/DIV2K/train/` 目录。
+| CIFAR-10 | `DS/CIFAR10/` | 分类训练/测试集 |
+| Set14 | `DS/Set14/` | 超分辨率测试集（14 张标准图片） |
+| DIV2K | `DS/DIV2K/train/` | 超分辨率训练集（800 张 HR 图片） |
 
 ### 2. 按顺序运行 Notebook
 
